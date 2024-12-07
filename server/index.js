@@ -8,7 +8,7 @@ const { app, server } = require('./socket/index')
 
 // const app = express()
 app.use(cors({
-    origin : ["https://bit-buzz.vercel.app/?vercelToolbarCode=Hxl285hBmBnp2cw"],
+    origin : ["https://bit-buzz-client.vercel.app/"],
     methods:["POST","GET"],
     credentials : true
 }))
