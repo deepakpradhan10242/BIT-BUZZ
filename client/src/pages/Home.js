@@ -13,77 +13,75 @@ const Home = () => {
   const navigate = useNavigate()
   const location = useLocation()
 
-  console.log('user',user)
-  const fetchUserDetails = async()=>{
+  const fetchUserDetails = async () => {
     try {
-        const URL = `${process.env.REACT_APP_BACKEND_URL}/api/user-details`
-        const response = await axios({
-          url : URL,
-          withCredentials : true
-        })
+      const URL = `${process.env.REACT_APP_BACKEND_URL}/api/user-details`
+      const response = await axios({
+        url: URL,
+        withCredentials: true // Ensure credentials are sent with the request
+      })
 
-        dispatch(setUser(response.data.data))
+      dispatch(setUser(response.data.data))
 
-        if(response.data.data.logout){
-            dispatch(logout())
-            navigate("/email")
-        }
-        console.log("current user Details",response)
+      if (response.data.data.logout) {
+        dispatch(logout())
+        navigate("/email")
+      }
+      console.log("current user Details", response)
     } catch (error) {
-        console.log("error",error)
+      console.log("error", error)
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchUserDetails()
-  },[])
+  }, [])
 
-  /***socket connection */
-  useEffect(()=>{
-    const socketConnection = io(process.env.REACT_APP_BACKEND_URL,{
-      auth : {
-        token : localStorage.getItem('token')
+  /*** socket connection */
+  useEffect(() => {
+    const socketConnection = io(process.env.REACT_APP_BACKEND_URL, {
+      auth: {
+        token: localStorage.getItem('token')
       },
+      withCredentials: true // Ensure credentials are sent with the request
     })
 
-    socketConnection.on('onlineUser',(data)=>{
+    socketConnection.on('onlineUser', (data) => {
       console.log(data)
       dispatch(setOnlineUser(data))
     })
 
     dispatch(setSocketConnection(socketConnection))
 
-    return ()=>{
+    return () => {
       socketConnection.disconnect()
     }
-  },[])
-
+  }, [])
 
   const basePath = location.pathname === '/'
   return (
     <div className='bg-red-800 grid lg:grid-cols-[350px,1fr] h-screen max-h-screen'>
-        <section className={`bg-white ${!basePath && "hidden"} lg:block`}>
-           <Sidebar/>
-        </section>
+      <section className={`bg-white ${!basePath && "hidden"} lg:block`}>
+        <Sidebar />
+      </section>
 
-        {/**message component**/}
-        <section className={`${basePath && "hidden"}`} >
-            <Outlet/>
-        </section>
+      {/**message component**/}
+      <section className={`${basePath && "hidden"}`}>
+        <Outlet />
+      </section>
 
-
-        <div className={`justify-center items-center flex-col gap-2 hidden ${!basePath ? "hidden" : "lg:flex" }`}>
-            <div>
-              <img
-                src={logo}
-                width={250}
-                alt='logo'
-              />
-            </div>
-            <p className='text-lg mt-2 text-white'>Select user to send message</p>
+      <div className={`justify-center items-center flex-col gap-2 hidden ${!basePath ? "hidden" : "lg:flex"}`}>
+        <div>
+          <img
+            src={logo}
+            width={250}
+            alt='logo'
+          />
         </div>
+        <p className='text-lg mt-2 text-white'>Select user to send message</p>
+      </div>
     </div>
   )
 }
 
-export default Home
+export default Home;
