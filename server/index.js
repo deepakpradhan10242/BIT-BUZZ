@@ -8,7 +8,11 @@ const { app, server } = require('./socket/index')
 
 // const app = express()
 app.use(cors({
-        origin: ["https://bit-buzz-client.vercel.app"],
+        origin : fetch('https://proxy.cors.sh/https://process.env.FRONTEND_URL', {
+        headers: {
+        'x-cors-api-key': 'temp_5ff5db0f59d066b04b80c33caf6c3f04'
+        }
+    }),
         methods: ["POST", "GET"],
         credentials: true
 }))
