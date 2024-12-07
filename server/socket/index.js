@@ -12,7 +12,13 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: ["https://bit-buzz-client.vercel.app"],
+        origin:  origin: fetch('https://proxy.cors.sh/https://bit-buzz-client.vercel.app', {
+  headers: {
+  'x-cors-api-key': 'temp_5ff5db0f59d066b04b80c33caf6c3f04'
+  }
+}),
+        methods: ["POST", "GET"],
+        credentials: true,
         methods: ["POST", "GET"],
         credentials: true
     }
