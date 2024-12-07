@@ -5,8 +5,12 @@
   ],
   "routes":[
     {
-      "src":"/{.*}",
-      "dest":"/"
+      "src":"/(.*)",
+      "dest":"/",
+      "methods": ["GET", "POST"],
+      "headers":{
+        "Access-Control-Allow-Origin":"*"
+      }
     }
    ]
 }
