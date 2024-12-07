@@ -9,9 +9,9 @@ const { app, server } = require('./socket/index')
 // const app = express()
 app.use(cors({
     origin : ["https://bit-buzz-client.vercel.app"],
-    methods:["POST","GET"],
-    credentials : true
-}))
+    methods:["POST", "GET"],
+    credentials: true
+}));
 app.use(express.json())
 app.use(cookiesParser())
 
