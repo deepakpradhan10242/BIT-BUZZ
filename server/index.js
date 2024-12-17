@@ -8,10 +8,10 @@ const { app, server } = require('./socket/index');
 
 // Enhanced CORS configuration
 app.use(cors({
-    origin: process.env.FRONTEND_URL, // Ensure this matches your frontend URL (e.g., https://bit-buzz-client.vercel.app)
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Include all required methods
-    credentials: true, // Allow cookies and other credentials
-    allowedHeaders: ['Content-Type', 'Authorization'], // Explicitly allow necessary headers
+    origin: process.env.FRONTEND_URL,
+    methods: ["PUT", "GET", "DELETE", "POST", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
 }));
 
 // Preflight handling
