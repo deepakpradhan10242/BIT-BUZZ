@@ -7,7 +7,11 @@ const cookiesParser = require('cookie-parser');
 const { app, server } = require('./socket/index');
 
 // Enhanced CORS configuration
-app.use(cors());
+app.use(cors({
+  origin: '*',  // or specify allowed origins
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  credentials: true
+}));
 
 // Preflight handling
 app.options('*', (req, res) => {
