@@ -10,6 +10,7 @@ const { app, server } = require('./socket/index');
 app.use(cors({
   origin: '*',  // or specify allowed origins
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
 
