@@ -18,7 +18,7 @@ const Home = () => {
       const URL = `${process.env.REACT_APP_BACKEND_URL}/api/user-details`
       const response = await axios({
         url: URL,
-        withCredentials: true // Ensure credentials are sent with the request
+        withCredentials: true 
       })
 
       dispatch(setUser(response.data.data))
@@ -43,7 +43,7 @@ const Home = () => {
       auth: {
         token: localStorage.getItem('token')
       },
-      withCredentials: true // Ensure credentials are sent with the request
+      withCredentials: true 
     })
 
     socketConnection.on('onlineUser', (data) => {
